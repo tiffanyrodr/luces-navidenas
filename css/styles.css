@@ -1,0 +1,12 @@
+.luces-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.luz {
+  width: 50px;
+  height: 50px;
+  background-color: gray;
+  border-radius: 8px;
+}

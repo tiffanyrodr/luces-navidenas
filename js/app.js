@@ -6,6 +6,9 @@ const patron5 = ["red", "red", "red", "red", "red", "green", "green", "green", "
 
 const patrones = [patron1, patron2, patron3, patron4, patron5];
 
+let indicePatron = 0;
+let velocidad = 1000; 
+
 const app = document.getElementById("app");
 
 function crearEstructura() {
@@ -44,8 +47,24 @@ function actualizarLuces(patron) {
     });
 }
 
+function iniciarAnimacion() {
+    const patronActual = patrones[indicePatron];
+
+    actualizarLuces(patronActual);
+
+    indicePatron++;
+
+    if (indicePatron >= patrones.length) {
+        indicePatron = 0;
+    }
+
+    setTimeout(iniciarAnimacion, velocidad);
+}
+
+
 crearEstructura();
 crearLuces();
-actualizarLuces(patron1);   
+iniciarAnimacion(); 
+ 
 
 

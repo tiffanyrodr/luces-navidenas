@@ -7,6 +7,7 @@ const patron5 = ["red", "red", "red", "red", "red", "green", "green", "green", "
 const patrones = [patron1, patron2, patron3, patron4, patron5];
 
 const app = document.getElementById("app");
+
 function crearEstructura() {
     const container = document.createElement("div");
     container.classList.add("container");
@@ -18,9 +19,11 @@ function crearEstructura() {
     lucesRow.classList.add("luces-row");
     lucesRow.id = "luces-row";
 
-    app.appendChild(container);
+    container.appendChild(titulo);
+    container.appendChild(lucesRow);
 
-    crearLuces();
+    app.appendChild(container);
+}
 
 function crearLuces() {
     const lucesRow = document.getElementById("luces-row");
@@ -32,4 +35,17 @@ function crearLuces() {
         lucesRow.appendChild(luz);
     }
 }
+
+function actualizarLuces(patron) {
+    const luces = document.querySelectorAll(".luz");
+
+    luces.forEach((luz, i) => {
+        luz.style.backgroundColor = patron[i];
+    });
 }
+
+crearEstructura();
+crearLuces();
+actualizarLuces(patron1);   
+
+

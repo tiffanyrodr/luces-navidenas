@@ -12,5 +12,16 @@ function crearEstructura() {
 
     app.appendChild(container);
 
-    crearEstructura();
+    crearLuces();
+
+function crearLuces() {
+    const lucesRow = document.getElementById("luces-row");
+
+    for (let i = 0; i < 10; i++) {
+        const luz = document.createElement("div");
+        luz.classList.add("luz");
+        luz.style.backgroundColor = "gray";
+        lucesRow.appendChild(luz);
+    }
+}
 }

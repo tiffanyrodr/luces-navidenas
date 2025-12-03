@@ -20,29 +20,13 @@ function generarPatronAleatorio() {
 }
 
 let indicePatron = 0;
-let velocidad = 1000;           
-let animacionActiva = true;     
-let timeoutId = null;           
+let velocidad = 1000;
+let animacionActiva = true;
+let timeoutId = null;
 
 const app = document.getElementById("app");
 
 function crearEstructura() {
-    const btnAleatorio = document.createElement("button");
-    btnAleatorio.textContent = "Patrón Aleatorio";
-    btnAleatorio.onclick = () => {
-    
-    const btnDark = document.createElement("button");
-    btnDark.textContent = "Modo Oscuro";
-    btnDark.onclick = () => {
-    document.body.classList.toggle("dark-mode");
-};
-
-    const nuevo = generarPatronAleatorio();
-    patrones.push(nuevo); 
-    indicePatron = patrones.length - 1; 
-    actualizarLuces(nuevo);
-};
-
     const container = document.createElement("div");
     container.classList.add("container");
 
@@ -83,13 +67,28 @@ function crearEstructura() {
     const btnMasRapido = document.createElement("button");
     btnMasRapido.textContent = "Más rápido";
     btnMasRapido.onclick = () => {
-        velocidad = Math.max(200, velocidad - 300); 
+        velocidad = Math.max(200, velocidad - 300);
     };
 
     const btnMasLento = document.createElement("button");
     btnMasLento.textContent = "Más lento";
     btnMasLento.onclick = () => {
         velocidad = velocidad + 300;
+    };
+
+    const btnAleatorio = document.createElement("button");
+    btnAleatorio.textContent = "Patrón Aleatorio";
+    btnAleatorio.onclick = () => {
+        const nuevo = generarPatronAleatorio();
+        patrones.push(nuevo);
+        indicePatron = patrones.length - 1;
+        actualizarLuces(nuevo);
+    };
+
+    const btnDark = document.createElement("button");
+    btnDark.textContent = "Modo Oscuro";
+    btnDark.onclick = () => {
+        document.body.classList.toggle("dark-mode");
     };
 
     controls.appendChild(btnPausa);
@@ -107,10 +106,8 @@ function crearEstructura() {
     app.appendChild(container);
 }
 
-
 function crearLuces() {
     const lucesRow = document.getElementById("luces-row");
-
     for (let i = 0; i < 10; i++) {
         const luz = document.createElement("div");
         luz.classList.add("luz");
@@ -140,7 +137,6 @@ function iniciarAnimacion() {
     indicePatron = (indicePatron + 1) % patrones.length;
 
     timeoutId = setTimeout(() => {
-
         if (animacionActiva) iniciarAnimacion();
     }, velocidad);
 }

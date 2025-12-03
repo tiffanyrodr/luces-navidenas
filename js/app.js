@@ -6,6 +6,19 @@ const patron5 = ["red", "red", "red", "red", "red", "green", "green", "green", "
 
 const patrones = [patron1, patron2, patron3, patron4, patron5];
 
+function generarColorAleatorio() {
+    const colores = ["red", "green", "blue", "yellow", "purple", "pink", "orange", "cyan"];
+    return colores[Math.floor(Math.random() * colores.length)];
+}
+
+function generarPatronAleatorio() {
+    const nuevoPatron = [];
+    for (let i = 0; i < 10; i++) {
+        nuevoPatron.push(generarColorAleatorio());
+    }
+    return nuevoPatron;
+}
+
 let indicePatron = 0;
 let velocidad = 1000;           
 let animacionActiva = true;     

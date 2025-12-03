@@ -7,7 +7,7 @@ const patron5 = ["red", "red", "red", "red", "red", "green", "green", "green", "
 const patrones = [patron1, patron2, patron3, patron4, patron5];
 
 function generarColorAleatorio() {
-    const colores = ["red", "green", "blue", "yellow", "purple", "pink", "orange", "cyan"];
+    const colores = ["red", "green", "blue", "yellow", "brown", "pink", "orange", "gray"];
     return colores[Math.floor(Math.random() * colores.length)];
 }
 
@@ -31,9 +31,15 @@ function crearEstructura() {
     btnAleatorio.textContent = "Patrón Aleatorio";
     btnAleatorio.onclick = () => {
     
+    const btnDark = document.createElement("button");
+    btnDark.textContent = "Modo Oscuro";
+    btnDark.onclick = () => {
+    document.body.classList.toggle("dark-mode");
+};
+
     const nuevo = generarPatronAleatorio();
-    patrones.push(nuevo); // lo agregamos a la lista
-    indicePatron = patrones.length - 1; // nos movemos al nuevo
+    patrones.push(nuevo); 
+    indicePatron = patrones.length - 1; 
     actualizarLuces(nuevo);
 };
 
@@ -91,6 +97,7 @@ function crearEstructura() {
     controls.appendChild(btnMasRapido);
     controls.appendChild(btnMasLento);
     controls.appendChild(btnAleatorio);
+    controls.appendChild(btnDark);
 
     container.appendChild(titulo);
     container.appendChild(lucesRow);

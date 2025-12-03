@@ -100,3 +100,25 @@ body {
   .controls { gap: 8px; }
 }
 
+.dark-mode {
+  background: #0f172a !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .container {
+  background: #1e293b !important;
+  color: #e2e8f0 !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4) !important;
+}
+
+.dark-mode .luz {
+  box-shadow: 0 6px 20px rgba(255,255,255,0.15) !important;
+}
+
+.dark-mode .controls button {
+  background: #475569 !important;
+  color: white !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25) !important;
+}
+
+

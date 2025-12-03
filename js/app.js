@@ -27,6 +27,16 @@ let timeoutId = null;
 const app = document.getElementById("app");
 
 function crearEstructura() {
+    const btnAleatorio = document.createElement("button");
+    btnAleatorio.textContent = "Patrón Aleatorio";
+    btnAleatorio.onclick = () => {
+    
+    const nuevo = generarPatronAleatorio();
+    patrones.push(nuevo); // lo agregamos a la lista
+    indicePatron = patrones.length - 1; // nos movemos al nuevo
+    actualizarLuces(nuevo);
+};
+
     const container = document.createElement("div");
     container.classList.add("container");
 
@@ -80,6 +90,7 @@ function crearEstructura() {
     controls.appendChild(btnReanudar);
     controls.appendChild(btnMasRapido);
     controls.appendChild(btnMasLento);
+    controls.appendChild(btnAleatorio);
 
     container.appendChild(titulo);
     container.appendChild(lucesRow);

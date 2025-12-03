@@ -7,7 +7,9 @@ const patron5 = ["red", "red", "red", "red", "red", "green", "green", "green", "
 const patrones = [patron1, patron2, patron3, patron4, patron5];
 
 let indicePatron = 0;
-let velocidad = 1000; 
+let velocidad = 1000;           
+let animacionActiva = true;     
+let timeoutId = null;           
 
 const app = document.getElementById("app");
 
@@ -22,11 +24,58 @@ function crearEstructura() {
     lucesRow.classList.add("luces-row");
     lucesRow.id = "luces-row";
 
+    const indicador = document.createElement("div");
+    indicador.classList.add("patron-indicador");
+    indicador.id = "patron-indicador";
+    indicador.textContent = `Patrón ${indicePatron + 1}/${patrones.length}`;
+
+    const controls = document.createElement("div");
+    controls.classList.add("controls");
+
+    const btnPausa = document.createElement("button");
+    btnPausa.textContent = "Pausa";
+    btnPausa.onclick = () => {
+        animacionActiva = false;
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+            timeoutId = null;
+        }
+    };
+
+    const btnReanudar = document.createElement("button");
+    btnReanudar.textContent = "Reanudar";
+    btnReanudar.onclick = () => {
+        if (!animacionActiva) {
+            animacionActiva = true;
+            iniciarAnimacion();
+        }
+    };
+
+    const btnMasRapido = document.createElement("button");
+    btnMasRapido.textContent = "Más rápido";
+    btnMasRapido.onclick = () => {
+        velocidad = Math.max(200, velocidad - 300); 
+    };
+
+    const btnMasLento = document.createElement("button");
+    btnMasLento.textContent = "Más lento";
+    btnMasLento.onclick = () => {
+        velocidad = velocidad + 300;
+    };
+
+    controls.appendChild(btnPausa);
+    controls.appendChild(btnReanudar);
+    controls.appendChild(btnMasRapido);
+    controls.appendChild(btnMasLento);
+
     container.appendChild(titulo);
     container.appendChild(lucesRow);
+    container.appendChild(indicador);
+    container.appendChild(controls);
 
     app.appendChild(container);
 }
+
 
 function crearLuces() {
     const lucesRow = document.getElementById("luces-row");
@@ -41,30 +90,32 @@ function crearLuces() {
 
 function actualizarLuces(patron) {
     const luces = document.querySelectorAll(".luz");
-
     luces.forEach((luz, i) => {
         luz.style.backgroundColor = patron[i];
     });
+
+    const indicador = document.getElementById("patron-indicador");
+    if (indicador) {
+        indicador.textContent = `Patrón ${indicePatron + 1}/${patrones.length}`;
+    }
 }
 
 function iniciarAnimacion() {
-    const patronActual = patrones[indicePatron];
+    if (!animacionActiva) return;
 
+    const patronActual = patrones[indicePatron];
     actualizarLuces(patronActual);
 
-    indicePatron++;
+    indicePatron = (indicePatron + 1) % patrones.length;
 
-    if (indicePatron >= patrones.length) {
-        indicePatron = 0;
-    }
+    timeoutId = setTimeout(() => {
 
-    setTimeout(iniciarAnimacion, velocidad);
+        if (animacionActiva) iniciarAnimacion();
+    }, velocidad);
 }
-
 
 crearEstructura();
 crearLuces();
-iniciarAnimacion(); 
- 
+iniciarAnimacion();
 
 
